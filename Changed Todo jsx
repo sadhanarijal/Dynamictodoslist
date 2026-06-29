@@ -1,0 +1,114 @@
+import { useState } from "react";
+import "./DynamicListTodos.css";
+
+export let DynamicListTodos = () => {
+    // 1. State for the list of Todos
+    let [todos, setTodos] = useState([
+        {
+            id: 1,
+            title: "Beautify Dynamic List Todo",
+            description: "jasari ni CSS apply garnu paryo , natari!!",
+            date: "2026-06-29",
+            complete: false,
+        }
+    ]);
+
+    // 2. Individual States for input elements
+    let [title, setTitle] = useState("");
+    let [description, setDescription] = useState("");
+    let [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+    let [complete, setComplete] = useState(false);
+
+    // 3. Change Handlers (Updated line 24 from the new photo)
+    let handleTitleChange = (e) => setTitle(e.target.value);
+    let handleDescriptionChange = (e) => setDescription(e.target.value);
+    let handleDateChange = (e) => setDate(e.target.value);
+    let handleCompleteChange = (e) => setComplete(e.target.checked); // <-- Updated to .checked
+
+    // 4. Submit function to append the data
+    let handleAddTodo = () => {
+        if (!title.trim()) return alert("Please enter a title!");
+        
+        let newTodo = {
+            id: Date.now(),
+            title: title,
+            description: description,
+            date: date,
+            complete: complete
+        };
+
+        setTodos([...todos, newTodo]);
+
+        // Reset fields
+        setTitle("");
+        setDescription("");
+        setComplete(false);
+    };
+
+    return (
+        <div className="todo-container">
+            <h1>Todos Form</h1>
+            <div className="todo-form">
+                {/* Title Input */}
+                <label htmlFor="todo-title">
+                    Todo Title:
+                    <input 
+                        id="todo-title" 
+                        type="text" 
+                        placeholder="Enter todo title"
+                        value={title}
+                        onChange={handleTitleChange}
+                    />
+                </label>
+
+                {/* Description Input */}
+                <label htmlFor="todo-desc">
+                    Description:
+                    <textarea 
+                        id="todo-desc" 
+                        type="text"
+                        placeholder="Enter todo description"
+                        value={description}
+                        onChange={handleDescriptionChange}
+                    />
+                </label>
+
+                {/* Date Input */}
+                <label htmlFor="todo-date">
+                    Date:
+                    <input 
+                        id="todo-date" 
+                        type="date"
+                        value={date}
+                        onChange={handleDateChange}
+                    />
+                </label>
+
+                {/* Checkbox Input (Updated from the new photo) */}
+                <label htmlFor="todo-status">
+                    <input 
+                        id="todo-status" 
+                        type="checkbox" 
+                        checked={complete} // <-- Controlled component binding
+                        onChange={handleCompleteChange}
+                    />
+                    Completed
+                </label>
+                
+                <button onClick={handleAddTodo}>Add Todo</button>
+            </div>
+
+            <h2>All Todos</h2>
+            {todos.map((ele) => {
+                return (
+                    <div className="todo-card" key={`${ele.id}-${ele.title}`}>
+                        <h4>{ele.title}</h4>
+                        <p>{ele.description}</p>
+                        <b>Date: {ele.date}</b>
+                        <b>Completed: {ele.complete ? "Yes" : "No"}</b>
+                    </div>
+                );
+            })}
+        </div>
+    );
+};
