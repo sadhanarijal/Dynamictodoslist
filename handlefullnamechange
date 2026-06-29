@@ -1,1 +1,25 @@
-
+import "./App.css"
+let App=()=>{
+  //r7:always use className attribute of class and for 
+  // html attribute instead of for. and attibute must be in camelCase
+  //r8:dont imbed logical code in jsx. 
+let PI=3.14
+let handleClick=()=>{
+  alert("oee yeta herrrrrrrrrrrrrrrrr")
+}
+let handlefullnamechange=(event)=>{
+  console.log(event.target.value)
+}
+return(
+  <div>
+    <h1 className="title" onClick={handleClick}> Hello World </h1>
+    {/*this is a comment in jsx*/}
+  <strong>
+<u> value of PI is {PI} </u>
+  </strong>
+  <br/>
+  <label htmlFor="full_name">full name</label>
+  <input id="full_name" type="text" placeholder="enter your name" onChange={handlefullnamechange}/>
+  </div>
+)}
+export default App
