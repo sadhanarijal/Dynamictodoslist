@@ -105,3 +105,58 @@
     padding: 3px 6px;
     width: fit-content;
   }
+import { useState } from "react"
+import "./DynamicListTodos.css";
+
+ export let DynamicListTodos=()=>{
+    let [todos,setTodos]=useState(
+        [
+            {
+                id:1,
+                title:"Beautify Dynamic List Todo",
+                description: "jasari ni CSS apply garnu paryo , natari!!",
+                date:"06-29-2026",
+                complete: false,
+            }
+        ]
+    )
+    let 
+    return(
+        <div className="todo_conntainer">
+            <h1>Todos Form</h1>
+            <div className="todo-form">
+                <label htmlFor="todo-title">
+                    Todo Title:
+                    <input id="todo-title" type="text" placeholder="Enter toso title"/>
+                </label>
+                 <label htmlFor="todo-des">
+                    Description:
+                    <input id="todo-des" type="text" placeholder="Enter todo description"/>
+                </label>
+                 <label htmlFor="todo-date">
+                    Date:
+                    <input id="todo-date" type="date"/>
+                </label>
+                <label htmlFor="todo-status">
+                    <input id="todo-status" type="checkbox" />
+                    Complete
+                </label>
+                <button>Add Todos</button>
+            </div>
+            <h2>All Todos</h2>
+            {
+                todos.map((ele)=>{
+                    return(
+                        <div key={`${ele.id}-${ele.title}`}>
+                            <h4>{ele.title}</h4>
+                            <p>{ele.description}</p>
+                            <b>Date:{ele.date}</b>
+                            <b>Completed:{ele.complete}</b>
+                        </div>
+                    )
+                }
+            )
+            }
+        </div>
+    )
+}
