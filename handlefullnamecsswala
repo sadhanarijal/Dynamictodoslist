@@ -1,1 +1,8 @@
+.title{
+  font-weight: italic;
+  color: #530a22;
+  text-shadow:4px 2px 2px #f8f2f1;
+  /* text shadow:x-offset y-offset blur-radius color; */
+text-align: center;
+}
 
